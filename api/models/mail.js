@@ -5,6 +5,7 @@ const mailgun = require("mailgun-js")({
 
 class Mail {
   constructor(email, phone, text, mailTo, mailSubject) {
+    super();
     this.mailFrom = email;
     this.phone = phone;
     this.text = text;
