@@ -1,7 +1,7 @@
 const express = require("express");
 const controller = express.Router();
 const Mail = require("./models/mail");
-const ErrorHandler = require("./models/error");
+const { ErrorHandler } = require("./models/error");
 const { check, validationResult } = require("express-validator");
 
 controller.post(
@@ -14,11 +14,12 @@ controller.post(
       .trim()
       .escape()
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     // Return HTTP status 400 if email or phone do not meet the validation requirements
     const errors = validationResult(req);
     if ("email" in errors.mapped() || "phone" in errors.mapped()) {
-      throw new ErrorHandler(400, { errors: errors.array() });
+      next(new ErrorHandler(400, { errors: errors.array() }));
+      return;
     }
 
     try {
@@ -37,7 +38,8 @@ controller.post(
       res.json(response);
     } catch (err) {
       // Return HTTP status 500 if something goes unexpectedly wrong
-      throw new ErrorHandler(500, err);
+      next(new ErrorHandler(500, err));
+      return;
     }
   }
 );
