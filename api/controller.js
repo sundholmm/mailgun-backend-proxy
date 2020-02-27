@@ -1,6 +1,6 @@
 const express = require("express");
 const controller = express.Router();
-const Mail = require("./services/mailService");
+const Mail = require("./models/mail");
 
 controller.post("/form/sendmail", async (req, res) => {
   try {
