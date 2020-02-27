@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const controller = require("./api/controller");
+const { handleError } = require("./api/models/error");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
@@ -14,6 +15,10 @@ router.use(controller);
 app.use("/api/v1", router);
 
 const port = process.env.PORT;
+
+app.use((err, req, res, next) => {
+  handleError(err, res);
+});
 
 app.listen(port, () => {
   console.log(`enepro-backend running on port ${port}`);
