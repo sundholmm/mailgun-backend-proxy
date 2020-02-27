@@ -1,20 +1,20 @@
-require("dotenv").config();
 const mailgun = require("mailgun-js")({
   apiKey: process.env.MAIL_API_KEY,
   domain: process.env.MAIL_DOMAIN
 });
 
 class Mail {
-  constructor(email, phone, text) {
-    this.mailTo = process.env.MAIL_TO;
-    this.mailSubject = process.env.MAIL_SUBJECT;
-    this.mailFrom = email || process.env.MAIL_FROM_ALTERNATIVE;
-    this.phone = phone || "";
-    this.text = text || "";
+  constructor(email, phone, text, mailTo, mailSubject) {
+    this.mailFrom = email;
+    this.phone = phone;
+    this.text = text;
+    this.mailTo = mailTo;
+    this.mailSubject = mailSubject;
   }
 
   sendEmail = () => {
     return new Promise((resolve, reject) => {
+      // Set the data to be sent as email
       const mailData = {
         from: this.mailFrom,
         to: this.mailTo,
@@ -22,6 +22,7 @@ class Mail {
         text: `${this.text} ${this.phone}`
       };
 
+      // Send the email and check for errors
       mailgun.messages().send(mailData, (error, body) => {
         if (error) {
           console.log(error);
