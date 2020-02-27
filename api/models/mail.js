@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mailgun = require("mailgun-js")({
   apiKey: process.env.MAIL_API_KEY,
   domain: process.env.MAIL_DOMAIN
@@ -5,7 +6,6 @@ const mailgun = require("mailgun-js")({
 
 class Mail {
   constructor(email, phone, text, mailTo, mailSubject) {
-    super();
     this.mailFrom = email;
     this.phone = phone;
     this.text = text;
