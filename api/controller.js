@@ -6,7 +6,7 @@ const { validateSchema } = require("./utils/helpers");
 const { check, validationResult } = require("express-validator");
 
 controller.post(
-  "/form/sendmail",
+  "/sendmail",
   [
     // Validate schema and values from the request body
     validateSchema("new-mail"),
