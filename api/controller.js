@@ -2,12 +2,14 @@ const express = require("express");
 const controller = express.Router();
 const Mail = require("./models/mail");
 const { ErrorHandler } = require("./models/error");
+const { validateSchema } = require("./utils/helpers");
 const { check, validationResult } = require("express-validator");
 
 controller.post(
   "/form/sendmail",
   [
-    // Validate values from the request body
+    // Validate schema and values from the request body
+    validateSchema("new-mail"),
     check("email").isEmail(),
     check("phone").isLength({ min: 10, max: 15 }),
     check("text")

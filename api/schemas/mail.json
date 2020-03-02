@@ -1,0 +1,19 @@
+{
+  "title": "new mail",
+  "description": "describes properties required to create a mail",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "email address of the mail object"
+    },
+    "phone": {
+      "type": "string",
+      "description": "phone number of the mail object"
+    },
+    "text": {
+      "type": "string",
+      "description": "text of the mail object"
+    }
+  }
+}
