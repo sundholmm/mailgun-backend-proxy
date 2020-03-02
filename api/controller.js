@@ -10,17 +10,21 @@ controller.post(
   [
     // Validate schema and values from the request body
     validateSchema("new-mail"),
-    check("email").isEmail(),
-    check("phone").isLength({ min: 10, max: 15 }),
+    check("email")
+      .normalizeEmail()
+      .isEmail(),
+    check("phone")
+      .if((value, { req }) => req.body.phone)
+      .isLength({ min: 10, max: 15 }),
     check("text")
       .trim()
       .escape()
   ],
   async (req, res, next) => {
-    // Return HTTP status 400 if email or phone do not meet the validation requirements
+    // Return HTTP status 422 if there are errors within the value validation
     const errors = validationResult(req);
-    if ("email" in errors.mapped() || "phone" in errors.mapped()) {
-      next(new ErrorHandler(400, { errors: errors.array() }));
+    if (!errors.isEmpty()) {
+      next(new ErrorHandler(422, { errors: errors.array() }));
       return;
     }
 
