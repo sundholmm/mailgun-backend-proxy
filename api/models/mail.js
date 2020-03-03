@@ -1,7 +1,8 @@
 require("dotenv").config();
 const mailgun = require("mailgun-js")({
   apiKey: process.env.MAIL_API_KEY,
-  domain: process.env.MAIL_DOMAIN
+  domain: process.env.MAIL_DOMAIN,
+  host: process.env.MAIL_HOST
 });
 
 class Mail {

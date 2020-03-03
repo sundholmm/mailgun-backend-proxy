@@ -10,9 +10,7 @@ controller.post(
   [
     // Validate schema and values from the request body
     validateSchema("new-mail"),
-    check("email")
-      .normalizeEmail()
-      .isEmail(),
+    check("email").isEmail(),
     check("phone")
       .if((value, { req }) => req.body.phone)
       .isLength({ min: 10, max: 15 }),
