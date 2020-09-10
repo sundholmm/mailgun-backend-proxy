@@ -2,7 +2,7 @@ require("dotenv").config();
 const mailgun = require("mailgun-js")({
   apiKey: process.env.MAIL_API_KEY,
   domain: process.env.MAIL_DOMAIN,
-  host: process.env.MAIL_HOST
+  host: process.env.MAIL_HOST,
 });
 
 class Mail {
@@ -21,7 +21,7 @@ class Mail {
         from: this.mailFrom,
         to: this.mailTo,
         subject: this.mailSubject,
-        text: `${this.text} ${this.phone}`
+        text: `${this.text} ${this.phone}`,
       };
 
       // Send the email and check for errors

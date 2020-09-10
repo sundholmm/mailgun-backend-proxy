@@ -11,11 +11,11 @@ const handleError = (err, res) => {
   res.status(statusCode).json({
     status: "error",
     statusCode,
-    message
+    message,
   });
 };
 
 module.exports = {
   ErrorHandler,
-  handleError
+  handleError,
 };

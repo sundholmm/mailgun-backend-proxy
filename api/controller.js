@@ -16,7 +16,7 @@ controller.post(
       .isLength({ min: 10, max: 15 }),
     check("text")
       .trim()
-      .escape()
+      .escape(),
   ],
   async (req, res, next) => {
     // Return HTTP status 422 if there are errors within the value validation

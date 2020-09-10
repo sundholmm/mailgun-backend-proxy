@@ -21,5 +21,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`enepro-backend running on port ${port}`);
+  console.log(`mailgun-backend-proxy running on port ${port}`);
 });

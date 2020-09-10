@@ -1,11 +1,11 @@
 {
-  "name": "enepro-backend",
+  "name": "mailgun-backend-proxy",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sundholmm/enepro-backend.git"
+    "url": "https://github.com/sundholmm/mailgun-backend-proxy.git"
   },
   "version": "1.0.0",
-  "description": "Node.js backend for enepro react website",
+  "description": "Node.js general purpose mailgun-backend-proxy",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

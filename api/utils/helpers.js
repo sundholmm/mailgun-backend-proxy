@@ -10,7 +10,7 @@ ajv.addSchema(userSchema, "new-mail");
  * @param  {String} schemaName - name of the schema to validate
  * @return {Object} response
  */
-const validateSchema = schemaName => {
+const validateSchema = (schemaName) => {
   return (req, res, next) => {
     const valid = ajv.validate(schemaName, req.body);
     if (!valid) {
