@@ -9,6 +9,8 @@ const { check, validationResult } = require("express-validator");
 controller.post(
   "/sendmail",
   [
+    // Validate the content type
+    check("content-type").equals("application/json"),
     // Validate the incoming request body against new-mail schema
     validateSchema("new-mail"),
     check("email").isEmail(),

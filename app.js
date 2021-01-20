@@ -46,8 +46,8 @@ app.use("/api/v1", router);
 const port = process.env.PORT;
 
 // Setup custom error handling middleware
-app.use((err, req, res) => {
-  handleError(err, res);
+app.use((err, req, res, next) => {
+  handleError(err, req, res, next);
 });
 
 // Initialize the application

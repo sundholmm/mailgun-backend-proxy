@@ -1,9 +1,9 @@
-const Ajv = require("ajv");
+const Ajv = require("ajv").default;
 const userSchema = require("../schemas/mail.json");
 const { ErrorHandler } = require("../models/error");
 
 // Setup ajv
-const ajv = Ajv({ allErrors: true, removeAdditional: "all" });
+const ajv = new Ajv({ allErrors: true, removeAdditional: "all" });
 
 // Add the new-mail schema to ajv
 ajv.addSchema(userSchema, "new-mail");
