@@ -4,6 +4,7 @@ const controller = require("./api/controller");
 const { handleError } = require("./api/models/error");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
 // Get the env values
 require("dotenv").config();
@@ -13,6 +14,18 @@ const router = express.Router();
 
 // Setup the express application
 const app = express();
+
+// For AWS trust the first hop from the front-facing proxy server
+app.set("trust proxy", 1);
+
+// Rate limiting configuration
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // limit each IP to 10 requests per windowMs
+});
+
+// Apply rate limiting to all requests
+app.use(limiter);
 
 // Use helmet middleware for setting up multiple security headers
 app.use(helmet());
