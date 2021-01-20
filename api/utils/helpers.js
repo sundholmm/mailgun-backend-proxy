@@ -1,15 +1,15 @@
 const Ajv = require("ajv");
-const ajv = Ajv({ allErrors: true, removeAdditional: "all" });
 const userSchema = require("../schemas/mail.json");
 const { ErrorHandler } = require("../models/error");
+
+// Setup ajv
+const ajv = Ajv({ allErrors: true, removeAdditional: "all" });
+
+// Add the new-mail schema to ajv
 ajv.addSchema(userSchema, "new-mail");
 
-/**
- * Validates incoming request bodies against the given schema,
- * providing an error response when validation fails
- * @param  {String} schemaName - name of the schema to validate
- * @return {Object} response
- */
+// validateSchema validates incoming request bodies against the given schema
+// providing an error response when validation fails
 const validateSchema = (schemaName) => {
   return (req, res, next) => {
     const valid = ajv.validate(schemaName, req.body);

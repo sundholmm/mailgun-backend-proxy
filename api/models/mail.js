@@ -1,10 +1,14 @@
+// Get the env values
 require("dotenv").config();
+
+// Setup mailgun client from the env values
 const mailgun = require("mailgun-js")({
   apiKey: process.env.MAIL_API_KEY,
   domain: process.env.MAIL_DOMAIN,
   host: process.env.MAIL_HOST,
 });
 
+// Mail class provides the email sending features
 class Mail {
   constructor(email, phone, text, mailTo, mailSubject) {
     this.mailFrom = email;
@@ -14,6 +18,7 @@ class Mail {
     this.mailSubject = mailSubject;
   }
 
+  // sendEmail method sends the JSON formatted data to mailgun API
   sendEmail = () => {
     return new Promise((resolve, reject) => {
       // Set the data to be sent as email

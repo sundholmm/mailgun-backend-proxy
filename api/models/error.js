@@ -1,3 +1,4 @@
+// ErrorHandler class provides the custom error handling middleware
 class ErrorHandler extends Error {
   constructor(statusCode, message) {
     super();
@@ -6,6 +7,7 @@ class ErrorHandler extends Error {
   }
 }
 
+// handleError builds the JSON error response from the error parameter
 const handleError = (err, res) => {
   const { statusCode, message } = err;
   res.status(statusCode).json({

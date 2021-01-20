@@ -5,18 +5,17 @@ const { ErrorHandler } = require("./models/error");
 const { validateSchema } = require("./utils/helpers");
 const { check, validationResult } = require("express-validator");
 
+// Setup the controller HTTP POST path /sendmail
 controller.post(
   "/sendmail",
   [
-    // Validate schema and values from the request body
+    // Validate the incoming request body against new-mail schema
     validateSchema("new-mail"),
     check("email").isEmail(),
     check("phone")
-      .if((value, { req }) => req.body.phone)
+      .if(({ req }) => req.body.phone)
       .isLength({ min: 10, max: 15 }),
-    check("text")
-      .trim()
-      .escape(),
+    check("text").trim().escape(),
   ],
   async (req, res, next) => {
     // Return HTTP status 422 if there are errors within the value validation
@@ -37,7 +36,7 @@ controller.post(
       // Create a new Mail object
       const mail = new Mail(email, phone, text, mailTo, mailSubject);
 
-      // Send the mail using the object's sendEmail method and return the response
+      // Send the mail using the Mail class method sendEmail() and return the response
       const response = await mail.sendEmail();
       res.json(response);
     } catch (err) {
