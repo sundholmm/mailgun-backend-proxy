@@ -37,6 +37,18 @@ app.use(cors());
 // Parse incoming request bodies before handlers
 app.use(bodyParser.json());
 
+// Set custom request logger
+app.use((req, res, next) => {
+  const currentDate = new Date();
+  console.log(
+    `[${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}] ${
+      req.method
+    } ${req.url} called by ${req.ip} ${req.hostname}`
+  );
+  console.log(req.body);
+  next();
+});
+
 // Set the router controller
 router.use(controller);
 
