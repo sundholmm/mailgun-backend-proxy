@@ -11,13 +11,14 @@ controller.post(
   [
     // Validate the content type
     check("content-type").equals("application/json"),
-    // Validate the incoming request body against new-mail schema
+    // Validate the incoming request body against new-mail schema using ajv
     validateSchema("new-mail"),
+    // Go through rest of the express-validator checks
     check("email").isEmail(),
     check("phone")
-      .if(({ req }) => req.body.phone)
-      .isLength({ min: 10, max: 15 }),
-    check("text").trim().escape(),
+      .isLength({ min: 10, max: 15 })
+      .optional({ checkFalsy: true }),
+    check("text").trim().escape().optional({ checkFalsy: true }),
   ],
   async (req, res, next) => {
     // Return HTTP status 422 if there are errors within the value validation

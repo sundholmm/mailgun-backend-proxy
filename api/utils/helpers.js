@@ -14,7 +14,7 @@ const validateSchema = (schemaName) => {
   return (req, res, next) => {
     const valid = ajv.validate(schemaName, req.body);
     if (!valid) {
-      return new ErrorHandler(400, { errors: ajv.errors });
+      next(new ErrorHandler(400, { errors: ajv.errors }));
     }
     next();
   };
