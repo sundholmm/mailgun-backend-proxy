@@ -49,4 +49,9 @@ controller.post(
   }
 );
 
+// Setup the controller HTTP GET path /health for AWS LB health checks
+controller.get("/health", async (req, res, next) => {
+  res.json({ status: "ok" });
+});
+
 module.exports = controller;

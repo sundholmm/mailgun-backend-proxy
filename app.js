@@ -24,8 +24,8 @@ const limiter = rateLimit({
   max: 10, // limit each IP to 10 requests per windowMs
 });
 
-// Apply rate limiting to all requests
-app.use(limiter);
+// Apply rate limiting to /sendmail path requests
+app.use("/api/v1/sendmail", limiter);
 
 // Use helmet middleware for setting up multiple security headers
 app.use(helmet());
