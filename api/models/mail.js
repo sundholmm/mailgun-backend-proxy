@@ -26,7 +26,11 @@ class Mail {
         from: this.mailFrom,
         to: this.mailTo,
         subject: this.mailSubject,
-        text: `${this.text} ${this.phone}`,
+        html:
+          `<h2>${this.mailSubject}</h2>` +
+          `<h3>Email: </h3><a href="mailto:${this.mailFrom}">${this.mailFrom}</a>` +
+          `<h3>Phone: </h3><a href="tel:${this.phone}">${this.phone}</a>` +
+          `<h3>Message: </h3><p>${this.text}</p>`,
       };
 
       // Send the email and check for errors
