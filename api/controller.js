@@ -54,4 +54,9 @@ controller.get("/health", async (req, res, next) => {
   res.json({ status: "ok" });
 });
 
+// Catch requests resulting to 404 and forward them to error handler
+controller.use(function (req, res, next) {
+  next(new ErrorHandler(404, "Not Found"));
+});
+
 module.exports = controller;
