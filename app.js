@@ -22,6 +22,7 @@ app.set("trust proxy", 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // limit each IP to 10 requests per windowMs
+  message: { status: "error", statusCode: 429, message: "Too Many Requests" },
 });
 
 // Apply rate limiting to /sendmail path requests
