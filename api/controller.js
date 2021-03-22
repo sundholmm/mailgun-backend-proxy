@@ -16,7 +16,7 @@ controller.post(
     // Go through rest of the express-validator checks
     check("email").isEmail(),
     check("phone")
-      .isLength({ min: 10, max: 15 })
+      .isLength({ min: 5, max: 20 })
       .optional({ checkFalsy: true }),
     check("text").trim().escape().optional({ checkFalsy: true }),
   ],
